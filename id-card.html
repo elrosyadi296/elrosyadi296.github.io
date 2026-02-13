@@ -44,7 +44,6 @@
       cursor: pointer;
     }
 
-    /* FLIP KIRI–KANAN (DEPAN–BELAKANG) */
     .card.flip {
       transform: rotateY(180deg);
     }
@@ -59,13 +58,11 @@
       box-shadow: 0 25px 45px rgba(0,0,0,.45);
     }
 
-    /* DEPAN */
     .front {
       background: linear-gradient(135deg, #ffffff, #f2f4f6);
       color: #333;
     }
 
-    /* BELAKANG */
     .back {
       background: linear-gradient(135deg, #203a43, #2c5364);
       color: #fff;
@@ -94,17 +91,25 @@
 
     .info-list {
       display: grid;
-      grid-template-columns: 70px 10px 1fr;
+      grid-template-columns: 80px 10px 1fr auto;
       font-size: 13px;
       row-gap: 6px;
+      align-items: center;
     }
 
-    .front .id-footer {
-      position: absolute;
-      bottom: 14px;
-      right: 18px;
+    .copy-btn {
       font-size: 11px;
-      color: #666;
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: rgba(255,255,255,0.15);
+      color: inherit;
+      transition: .2s;
+    }
+
+    .copy-btn:hover {
+      opacity: .7;
     }
 
     .payment-title {
@@ -143,9 +148,17 @@
           </div>
 
           <div class="info-list">
-            <div>Email</div><div>:</div><div>ceo@296.web.id</div>
-			<div>Website</div><div>:</div><div>296.web.id</div>
-            <div>Kontak</div><div>:</div><div>08133-296-4445</div>
+            <div>Email</div><div>:</div>
+            <div id="email">ceo@296.web.id</div>
+            <button class="copy-btn" onclick="copyText(event,'email')">Copy</button>
+
+            <div>Website</div><div>:</div>
+            <div id="website">296.web.id</div>
+            <button class="copy-btn" onclick="copyText(event,'website')">Copy</button>
+
+            <div>Kontak</div><div>:</div>
+            <div id="kontak">08133-296-4445</div>
+            <button class="copy-btn" onclick="copyText(event,'kontak')">Copy</button>
           </div>
 
          <!--- <div class="id-footer">Tap untuk lihat pembayaran</div> --->
@@ -155,10 +168,21 @@
         <div class="side back">
           <div class="payment-title">Informasi Pembayaran</div>
           <div class="payment-box info-list">
-            <div>DANA</div><div>:</div><div>085875522018</div>
-            <div>GOPAY</div><div>:</div><div>085875522018</div>
-            <div>BNI</div><div>:</div><div>0765219830</div>
-			<div>MANDIRI</div><div>:</div><div>1850010085386</div>
+            <div>DANA</div><div>:</div>
+            <div id="dana">085875522018</div>
+            <button class="copy-btn" onclick="copyText(event,'dana')">Copy</button>
+
+            <div>GOPAY</div><div>:</div>
+            <div id="gopay">085875522018</div>
+            <button class="copy-btn" onclick="copyText(event,'gopay')">Copy</button>
+
+            <div>BNI</div><div>:</div>
+            <div id="bni">0765219830</div>
+            <button class="copy-btn" onclick="copyText(event,'bni')">Copy</button>
+
+            <div>MANDIRI</div><div>:</div>
+            <div id="mandiri">1850010085386</div>
+            <button class="copy-btn" onclick="copyText(event,'mandiri')">Copy</button>
           </div>
         </div>
 
@@ -168,9 +192,20 @@
     <div class="hint">Tap kartu untuk beralih sisi</div>
 
   </div>
-
+  <script>
+    function copyText(event, id) {
+      event.stopPropagation();
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text);
+      event.target.innerText = "Copied";
+      setTimeout(() => {
+        event.target.innerText = "Copy";
+      }, 1200);
+    }
+  </script>
 </body>
 
 </html>
+
 
 
